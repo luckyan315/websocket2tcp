@@ -7,14 +7,30 @@
 "use strict";
 
 function WebSocket(){
+  var websocket = {};
   
 }
 
 (function(){
+  //public funcs
+  
+  this.open = function(uri){
+    //TODO:
+  };
+
+  this.close = function(){
+    //TODO:
+  };
+
+  this.send = function(msg){
+    //TODO:
+  };
+
+  // test funcs
 
   this.init = function(){
     //
-    alert('init websocket');
+    logger.debug('init websocket');
   };
   
 }).call(WebSocket.prototype);
