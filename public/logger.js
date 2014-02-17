@@ -6,7 +6,11 @@
 
 "use strict";
 
-var logger = {};
+var logger = {
+  //logger print level
+  level: 'debug' 
+};
+
 
 logger.init = function(level){
   logger.debug = logger.log = logger.info = logger.warn = logger.error = function(msg) {};
@@ -25,4 +29,5 @@ logger.init = function(level){
 
 };
 
-logger.init('debug');
+//init logger level
+logger.init(logger.level);

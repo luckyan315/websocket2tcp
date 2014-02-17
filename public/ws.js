@@ -30,7 +30,12 @@ function WebSocket(){
 
   this.init = function(){
     //
-    logger.debug('init websocket');
+    logger.log('this is log!');
+    logger.debug('this is debug!');
+    logger.info('this is info!');
+    logger.warn('this is warn!');
+    logger.error('this is error!');
+    
   };
   
 }).call(WebSocket.prototype);
