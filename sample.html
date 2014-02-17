@@ -1,5 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
+    <script type="text/javascript" src="public/util.js"></script>
+    <script type="text/javascript" src="public/event.js"></script>
     <script type="text/javascript" src="public/logger.js"></script>
     <script type="text/javascript" src="public/ws.js"></script>
   </head>
@@ -14,6 +16,10 @@
     function init(){
     var ws = new WebSocket();
     ws.init();
+
+    ws.on('after_init', function(){
+      logger.info('recv after init event!');
+    });
     }
 
     

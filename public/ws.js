@@ -7,9 +7,13 @@
 "use strict";
 
 function WebSocket(){
+  EventEmitter.call(this);
+  
   var websocket = {};
   
 }
+
+Utils.inherits(WebSocket, EventEmitter);
 
 (function(){
   //public funcs
@@ -31,12 +35,13 @@ function WebSocket(){
 
   this.init = function(){
     // test log level
-    // logger.log('this is log!');
-    // logger.debug('this is debug!');
-    // logger.info('this is info!');
-    // logger.warn('this is warn!');
-    // logger.error('this is error!');
-    
+    logger.log('this is log!');
+    logger.debug('this is debug!');
+    logger.info('this is info!');
+    logger.warn('this is warn!');
+    logger.error('this is error!');
+
+    this.emit('after_init');
   };
   
 }).call(WebSocket.prototype);

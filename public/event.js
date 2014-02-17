@@ -14,6 +14,7 @@ function EventEmitter(){
   this.$events = this.$events || {};
 }
 
+
 (function(){
 
   this.emit = function(event){
@@ -61,3 +62,4 @@ function EventEmitter(){
   };
   
 }).call(EventEmitter.prototype);
+
