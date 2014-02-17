@@ -23,7 +23,7 @@ function EventEmitter(){
 
     for (var i = 0; i < this.$events[event].length; ++i)
     {
-      var fn = this.$events[event];
+      var fn = this.$events[event][i];
       switch (arguments.length) {
        case 1:
         fn.call(this);

@@ -5,7 +5,9 @@
 
 "use strict";
 
-var Utils = {};
+function Utils(){
+  
+}
 
 (function(){
 

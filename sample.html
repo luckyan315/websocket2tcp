@@ -20,6 +20,8 @@
     ws.on('after_init', function(){
       logger.info('recv after init event!');
     });
+    ws.emit('after_init');
+
     }
 
     
