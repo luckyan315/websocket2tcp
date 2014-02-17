@@ -12,8 +12,8 @@ function WebSocket(){
   var websocket = {};
   
 }
-var util = new Utils();
-util.inherits(WebSocket, EventEmitter);
+
+Utils.inherits(WebSocket, EventEmitter);
 
 (function(){
   //public funcs

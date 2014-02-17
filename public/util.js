@@ -5,9 +5,8 @@
 
 "use strict";
 
-function Utils(){
-  
-}
+//global defination
+var Utils = {};
 
 (function(){
 
@@ -42,4 +41,4 @@ function Utils(){
     return d;
   };
   
-}).call(Utils.prototype);
+}).call(Utils);
