@@ -16,6 +16,7 @@ function WebSocket(){
   
   this.open = function(uri){
     //TODO:
+    
   };
 
   this.close = function(){
@@ -29,12 +30,12 @@ function WebSocket(){
   // test funcs
 
   this.init = function(){
-    //
-    logger.log('this is log!');
-    logger.debug('this is debug!');
-    logger.info('this is info!');
-    logger.warn('this is warn!');
-    logger.error('this is error!');
+    // test log level
+    // logger.log('this is log!');
+    // logger.debug('this is debug!');
+    // logger.info('this is info!');
+    // logger.warn('this is warn!');
+    // logger.error('this is error!');
     
   };
   
