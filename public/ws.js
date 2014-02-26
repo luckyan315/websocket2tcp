@@ -30,7 +30,8 @@ Utils.inherits(Ws, EventEmitter);
   this.open = function(){
     //TODO:
     this.websocket = new WebSocket(this.uri, this.protocol);
-
+    this.websocket.binaryType = 'arraybuffer';
+    
     //register listeners
     this.websocket.onmessage = this.onmessage.bind(this);
     this.websocket.onopen = this.onopen.bind(this);
@@ -40,28 +41,52 @@ Utils.inherits(Ws, EventEmitter);
 
   this.close = function(){
     //TODO:
+    logger.debug('[websocket]:' + 'closing websocket connection...');
+    this.websocket.close();
   };
 
   this.send = function(msg){
     //TODO:
+    // '>' means msg sent by browser
+    logger.debug('> ' + msg);
+    this.websocket.send(msg);
   };
 
   //private funcs
-  this.onmessage = function(msg){
-    // '<' means msg recv,  '>' means msg sent 
-    logger.debug('< ' + msg);
+  
+  /**
+   * A message event recv by websocket server
+   * @param {MessageEvent} e 
+   */
+  this.onmessage = function(e){
+    // '<' means recv msg from ws server,
+    var u8 = new Uint8Array(e.data);
+    var msgQ = [];
+    for(var i = 0; i < u8.length; ++i) {
+      msgQ.push(u8[i]);
+    }
+    
+    var msg = msgQ.map(function(element){
+      return String.fromCharCode(element);
+    }).join('');
+
+    logger.debug('< ' , msg);
+    this.emit('message', msg);
   };
 
   this.onopen = function(){
     logger.debug('[websocket][onopen]');
+    this.emit('connection');
   };
 
   this.onclose = function(){
     logger.debug('[websocket][onclose]');
+    this.emit('close');
   };
 
   this.onerror = function(err){
     logger.debug('[websocket][onerror]: ' , err);
+    this.emit.call(this, 'error', err);
   };
   
 }).call(Ws.prototype);
