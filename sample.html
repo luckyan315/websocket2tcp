@@ -14,14 +14,8 @@
   <script type="text/javascript">
 
     function init(){
-    var ws = new WebSocket();
-    ws.init();
-
-    ws.on('after_init', function(){
-      logger.info('recv after init event!');
-    });
-    ws.emit('after_init');
-
+    var ws = new Ws('ws:\\127.0.0.1:8888', 'base64');
+    ws.open();
     }
 
     
