@@ -1,5 +1,6 @@
 /**
- * a proxy server for pipe websocket to tcp
+ * a proxy server for pipe incoming(req)/outging(res) msg between websocket to tcp
+ *
  * Copyright (C) 2014 guanglin.an (lucky315.an@gmail.com)
  * 
  */

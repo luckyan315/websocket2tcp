@@ -10,4 +10,4 @@ Options:
   -t  [required]
 ```
 
-a proxy server for piping data between websocket to tcp 
+a proxy server for pipe incoming(req)/outging(res) msg between websocket to tcp 
