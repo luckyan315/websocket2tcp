@@ -8,14 +8,67 @@
 
   <body>
     <p>WebSocket Demo via node.js</p>
-
-    <input type="button" name="" value="init" onclick="init()"/>
+    Websocket Uri:<input id="uri" value="ws:\\127.0.0.1:8888"/>
+    <input type="button" name="" value="connect" onclick="connect()"/>
+    &nbsp;    &nbsp;    &nbsp;
+    Send: <input id="sendmsg" type="" name="" value="" />
+    <input type="button" name="" value="send" onclick="send()"/>
+    <br />
+    LogView:
+    <br />
+    <textarea name="" id="logview" rows="24" cols="80" ></textarea>
+    
   </body>
   <script type="text/javascript">
+    //global insts
+    var $ = function(id){ return document.getElementById(id); };
+    var ws = {};
+    var logview = $('logview');
 
-    function init(){
-    var ws = new Ws('ws:\\127.0.0.1:8888', 'base64');
+    //internal funcs
+    
+    function send(){
+    var msg = $('sendmsg').value;
+    
+    ws.send(msg);
+    logview.innerHTML += '> ' + msg + '\n';
+    };
+    
+    function connect(){
+    var uri = ($('uri') && $('uri').value) || 'ws://127.0.0.1:8888';
+    var protocol = ($('protocol') && $('protocol').value) || 'binary';
+    
+    ws = new Ws(uri, protocol);
     ws.open();
+
+    ws.on('connection', function(){
+    logger.debug('[html][connection]');
+    //TODO:
+
+    logview.innerHTML += 'Websocket connected success!' + '\n';
+    
+    });
+
+    ws.on('message', function(msg){
+    logger.debug('[html][message]' + msg);
+    //TODO:
+
+    logview.innerHTML += '< ' + msg + '\n';
+    
+    });
+
+    ws.on('close', function(){
+    logger.debug('[html][close]');
+    //TODO:
+    
+    });
+
+    ws.on('error', function(err){
+    logger.error('[html][error]', err);
+    //TODO:
+    
+    });
+    
     }
 
     
