@@ -44,7 +44,7 @@ function handleRequest(req, res, next){
     }
     
     fs.readFile(filename, 'binary', function(err, file){
-      if (err) return http_error(res, 500, err);
+      if (err) return http_error(res, 500, err.toString());
 
       res.writeHead(200);
       res.write(file, 'binary');
