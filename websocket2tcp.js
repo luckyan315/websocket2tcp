@@ -26,6 +26,8 @@ var WebSocketServer = ws.Server;
 /* websocket server */
 var wsServer = null; 
 
+var isDebugMode = false;
+
 /* create web server */
 var webServer = http.createServer(handleRequest);
 
@@ -56,7 +58,8 @@ function handleRequest(req, res, next){
 /* handle websocket connection */
 function handleConnection(client){
   //TODO:
-  log('a new client is connected! ', target_addr_port, getIp(target_addr));
+  log('a new client is connected! ', source_addr_port, getIp(target_addr));
+  log('Version: ' + client.protocolVersion + ', Protocol: ' + client.protocol);
   var remote = net.createConnection(target_addr_port, getIp(target_addr), function(){
     log('Remote TCP Server is connected!');
   });
@@ -112,7 +115,7 @@ function handleConnection(client){
 function log(){
   var prefix = '\x1b[32m[debug] \x1b[m ';
   Array.prototype.unshift.call(arguments, prefix);
-  return process.env.NODE_ENV === 'production'
+  return (process.env.NODE_ENV === 'production' || !isDebugMode)
     ? null : console.log.apply(console, arguments);
 }
 

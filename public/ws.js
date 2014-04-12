@@ -6,7 +6,7 @@
 
 "use strict";
 
-function Ws(uri, protocol){
+function Ws(uri, protocol) {
   EventEmitter.call(this);
   
   this.websocket = {};
