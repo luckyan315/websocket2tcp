@@ -26,7 +26,7 @@ var WebSocketServer = ws.Server;
 /* websocket server */
 var wsServer = null; 
 
-var isDebugMode = false;
+var isDebugMode = true;
 
 /* create web server */
 var webServer = http.createServer(handleRequest);
