@@ -13,9 +13,10 @@ var fs = require('fs');
 var net = require('net');
 var argv = require('optimist')
   .usage('Usage: $0 -s [source_addr] -t [target_addr] -p [static_dir]')
-  .demand(['s','t']).argv;
-var source_addr = argv.s || '127.0.0.1:8888';
-var target_addr = argv.t;
+  // .demand(['s','t'])
+  .argv;
+var source_addr = argv.s || '127.0.0.1:6080';
+var target_addr = argv.t || '127.0.0.1:9999';
 var source_addr_port = getPort(source_addr);
 var target_addr_port = getPort(target_addr);
 var static_path = path.join(__dirname, argv.p || './');
@@ -32,7 +33,7 @@ var isDebugMode = true;
 var webServer = http.createServer(handleRequest);
 
 webServer.listen(source_addr_port, function(){
-  log('Websocket2TCP Proxy listen on ' + source_addr_port);
+  log('Websocket2TCP Proxy listen on localhost:' + source_addr_port + ' remote: ' + target_addr);
   wsServer = new WebSocketServer({server : webServer, handleProtocols: selectProtocol});
   wsServer.on('connection', handleConnection);
 });

@@ -29,5 +29,24 @@ Utils.inherits(Desk, EventEmitter);
     cb && cb();
     // this.emit('init');
   };
+
+  this.connect = function(){
+
+    var host = document.getElementById('host').value;
+    var port = document.getElementById('port').value;
+    var password = document.getElementById('password').value;
+    var ws_protocol = 'binary';
+    
+    if ((!host) || (!port)) {
+    throw new Error('Host and Port Must be set!');
+    }
+
+    this.vnc.connect(host, port, password, ws_protocol);
+  };
+
+  this.send = function(msg){
+    //TODO:
+    this.vnc.send(msg);
+  };
   
 }).call(Desk.prototype);

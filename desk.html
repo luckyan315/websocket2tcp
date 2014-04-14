@@ -11,14 +11,16 @@
   <body>
     <p>Remote Desktop via vnc server </p>
     
-    Host: <input id="host" value="host" />
-    port: <input id="port" value="port" />
-    password: <input type="password" id="password" value="password" />
+    Host: <input id="host" value="localhost" />
+    port: <input id="port" value="6080" />
+    password: <input type="password" id="password" value="123456" />
     
     <br />
-    <input type="button" name="" value="connect" onclick="connect()"/>
-    <br />
+    <input id="btn_connect" type="button" name="" value="connect"/>
+    <input id="btn_send" type="button" name="" value="send" />
 
+    <br />
+    <textarea id="textarea" ></textarea>
     <div id="canvas_container">
       <canvas id="canvas" width="640px" height="20px">
 	It is a HTML5 Canvas
@@ -27,29 +29,26 @@
 
   </body>
   <script type="text/javascript">
-    function connect(e){
-
     var $ = function(id){
     return document.getElementById(id);
-    }
-    
-    var host = $('host').value;
-    var port = $('port').value;
-    var password = $('password').value;
-
-    if ((!host) || (!port)) {
-    throw new Error('Host and Port Must be set!');
-    }
-
-    
     }
 
     window.onload = function(){
 
-    //
+    //main ui
     var desk = new Desk();
     desk.init();
 
+    //add listeners
+    $('btn_connect').onclick = function(){
+    return desk.connect();
+    };
+
+    $('btn_send').onclick = function(){
+    var msg = $('textarea').value;
+
+    desk.send(msg);
+    }
     }
   </script>
 </html>

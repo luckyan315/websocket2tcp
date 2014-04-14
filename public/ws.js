@@ -24,7 +24,7 @@ Utils.inherits(Ws, EventEmitter);
   //public funcs
 
   this.init = function(){
-    logger.debug('init websocket...');
+    logger.debug('init websocket...' + this.uri + ' protocol:' + this.protocol);
   };
   
   this.open = function(){
