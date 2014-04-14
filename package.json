@@ -1,8 +1,7 @@
 {
-    "name" : "websocket2tcp"
-    "version" : "0.1",
-    "description" : "a proxy server for pipe incoming(req)/outging(res) msg between websocket to tcp 
-",
+    "name" : "websocket2tcp",
+    "version" : "0.0.1",
+    "description" : "a proxy server for pipe incoming(req)/outging(res) msg between websocket to tcp",
     "main" : "websocket2tcp.js",
 
     "dependencies" : {
@@ -10,6 +9,6 @@
     },
 
     "author" : "luckyan315",
-    "readmeFilename" : "README.md",
+    "readmeFilename" : "README.md"
     
 }
