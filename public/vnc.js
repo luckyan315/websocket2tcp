@@ -31,21 +31,29 @@ Utils.inherits(VNC, EventEmitter);
       debug('[vnc][onconnection]new client connected...');
     });
 
-    this.ws.on('message', function(data){
-      //TODO: on data
-      debug('[vnc][onmessage] ' + data);
-    });
+    this.ws.on('message', this.handleMessage.bind(this));
 
     this.ws.on('close', function(){
+      //TODO: on close
       debug('[vnc][onclose] closed');
+    });
+
+    this.ws.on('error', function(err){
+      debug.warn('[vnc][onerror] ' + err);
     });
     
   };
   
   this.send = function(msg){
+    if (!this.ws) {
+      throw new Error('Pls connect the web socket first, see vnc.connect()');
+    }
     this.ws.send(msg);
   };
   
   //private
+  this.handleMessage = function(data){
+    debug('[vnc][handlMessage] ' + data, this);
+  };
   
 }).call(VNC.prototype);

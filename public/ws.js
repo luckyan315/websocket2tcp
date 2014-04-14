@@ -14,17 +14,21 @@ function Ws(uri, protocol) {
   this.uri = uri;
   /* select a protocol, ('base64' | 'binary') */
   this.protocol = protocol;
-
+  /* received msg queue */
+  this.recvQ = [];
   this.init();
 }
 
 Utils.inherits(Ws, EventEmitter);
 
 (function(){
+  //consts
+  var debug = logger.debug;
+  
   //public funcs
 
   this.init = function(){
-    logger.debug('init websocket...' + this.uri + ' protocol:' + this.protocol);
+    debug('init websocket...' + this.uri + ' protocol:' + this.protocol);
   };
   
   this.open = function(){
@@ -41,14 +45,14 @@ Utils.inherits(Ws, EventEmitter);
 
   this.close = function(){
     //TODO:
-    logger.debug('[websocket]:' + 'closing websocket connection...');
+    debug('[websocket]:' + 'closing websocket connection...');
     this.websocket.close();
   };
 
   this.send = function(msg){
     //TODO:
     // '>' means msg sent by browser
-    logger.debug('> ' + msg);
+    debug('> ' + msg);
     this.websocket.send(msg);
   };
 
@@ -60,32 +64,35 @@ Utils.inherits(Ws, EventEmitter);
    */
   this.onmessage = function(e){
     // '<' means recv msg from ws server,
+    debug('[onmessage][e.data] ' , e.data);
+    //e.data is a ArrayBuffer obj in binary transmission,
+    //so use Unit8Array to master(get/set) the msg
     var u8 = new Uint8Array(e.data);
-    var msgQ = [];
+
     for(var i = 0; i < u8.length; ++i) {
-      msgQ.push(u8[i]);
+      this.recvQ.push(u8[i]);
     }
     
-    var msg = msgQ.map(function(element){
+    var msg = this.recvQ.map(function(element){
       return String.fromCharCode(element);
     }).join('');
 
-    logger.debug('< ' , msg);
+    debug('< ' , msg);
     this.emit('message', msg);
   };
 
   this.onopen = function(){
-    logger.debug('[websocket][onopen]');
+    debug('[websocket][onopen]');
     this.emit('connection');
   };
 
   this.onclose = function(){
-    logger.debug('[websocket][onclose]');
+    debug('[websocket][onclose]');
     this.emit('close');
   };
 
   this.onerror = function(err){
-    logger.debug('[websocket][onerror]: ' , err);
+    debug('[websocket][onerror]: ' , err);
     this.emit.call(this, 'error', err);
   };
   
