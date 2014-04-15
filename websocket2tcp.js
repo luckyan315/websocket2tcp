@@ -62,11 +62,11 @@ function handleConnection(client){
   log('a new client is connected! ', source_addr_port, getIp(target_addr));
   log('Version: ' + client.protocolVersion + ', Protocol: ' + client.protocol);
   var remote = net.createConnection(target_addr_port, getIp(target_addr), function(){
-    log('Remote TCP Server is connected!');
+    log('Remote TCP Server ' + '(' + target_addr + ')' + ' is connected!');
   });
 
   remote.on('data', function(data){
-    log('[Remote --> Proxy] ' + data);
+    log('[Remote --> Proxy]' + '['+ client.protocol +'] ' + data);
     if (client.protocol === 'base64') {
       client.send(new Buffer(data).toString('base64'));
     } else {
@@ -88,7 +88,7 @@ function handleConnection(client){
   
   client.on('message', function(msg){
     //TODO:
-    log('[Client --> Proxy] ' + msg);
+    log('[Client --> Proxy] ' + '['+ client.protocol +'] ' + msg);
     if (client.protocol === 'base64') {
       remote.write(new Buffer(msg, 'base64'));
     } else {
