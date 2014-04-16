@@ -16,8 +16,12 @@ a proxy server for pipe incoming(req)/outging(res) msg between websocket to tcp
 
 ### vnc server
 ```script
+$sudo apt-get install openssh-server vnc4server
 $/etc/ssh/sshd_config, add following content
 X11Forwrding yes
+
+$vncpass
+$vnc4server
 ```
 
 ## vnc client in win
