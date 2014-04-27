@@ -19,6 +19,20 @@ getPort = (addr) ->
   throw new Error 'need to input uri!' if not addr
   addr.split(':')[1]
 
+# handle http request
+handleRequest = (req, res, next) ->
+  filename = path.join static_path, url.parse(req.url).pathname
+  log "-----filename: #{filename}"
+  fs.exists filename, (exists) ->
+    return http_error res, 404, '404 Not Found' if not exists
+    
+    fs.readFile filename, 'binary', (err, file) ->
+      return http_error res, 500, err.toString() if err
+
+      res.writeHead 200
+      res.write file, 'binary'
+      res.end()
+
 
 argv = require('optimist').usage('Usage: $0 -s [source_addr] -t [target_addr] -p [static_dir').argv
 
@@ -48,7 +62,7 @@ webServer.listen source_addr_port, () ->
 
 # util funcs
 log = () ->
-  prefix = "\x1b[32m[debg] \x1b[m"
+  prefix = "\x1b[32m[debug] \x1b[m"
   Array::unshift.call arguments, prefix
   console.log.apply(console, arguments) if isDebugMode
 
@@ -71,20 +85,6 @@ selectProtocol = (protocols, callback) ->
     log "Client must support 'binary' or 'base64' protocol"
     callback false
 
-# handle http request
-handleRequest = (req, res, next) ->
-  filename = path.join static_path, url.parse(req.url).pathname
-  fs.exists filename, (exists) ->
-    http_error res, 404, '404 Not Found' if not exists
-    return
-    
-    fs.readFile filename, 'binary', (err, file) ->
-      http_error res, 500, err.toString() if err
-      return 
-
-      res.writeHead 200
-      res.write file, 'binary'
-      res.end()
 
 
 # handle websocket connection
