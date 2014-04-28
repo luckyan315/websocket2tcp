@@ -5,7 +5,7 @@
   "main" : "websocket2tcp.js",
 
   "dependencies" : {
-  "ws" : "*",
+  "ws" : "0.4.31",
 	"optimist" : "0.6.1"
     },
 
