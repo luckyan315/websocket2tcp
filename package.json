@@ -5,11 +5,15 @@
   "main" : "websocket2tcp.js",
 
   "dependencies" : {
-  "ws" : "0.4.31",
-	"optimist" : "0.6.1"
+    "ws" : "0.4.31",
+    "optimist" : "0.6.1"
     },
-
-  "author" : "luckyan315",
-  "readmeFilename" : "README.md"
-    
+  "devDependencies" : {
+    "mocha": "1.16.2",
+    "expect.js": "0.3.1",
+    "supertest": "0.8.2",
+    "superagent": "0.17.0",
+    },
+    "author" : "luckyan315",
+    "readmeFilename" : "README.md"
 }

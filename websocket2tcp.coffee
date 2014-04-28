@@ -22,7 +22,6 @@ getPort = (addr) ->
 # handle http request
 handleRequest = (req, res, next) ->
   filename = path.join static_path, url.parse(req.url).pathname
-  log "-----filename: #{filename}"
   fs.exists filename, (exists) ->
     return http_error res, 404, '404 Not Found' if not exists
     
