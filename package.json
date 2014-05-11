@@ -1,15 +1,25 @@
 {
-    "name" : "websocket2tcp",
-    "version" : "0.0.1",
-    "description" : "a proxy server for pipe incoming(req)/outging(res) msg between websocket to tcp",
-    "main" : "websocket2tcp.js",
+  "name" : "websocket2tcp",
+  "version" : "0.0.1",
+  "description" : "a proxy server for pipe incoming(req)/outging(res) msg between websocket to tcp",
+  "main" : "websocket2tcp.js",
 
+<<<<<<< HEAD
     "dependencies" : {
 	"ws"         : "0.4.31",
 	"optimist" : "0.6.1"
+=======
+  "dependencies" : {
+    "ws" : "0.4.31",
+    "optimist" : "0.6.1"
     },
-
+  "devDependencies" : {
+    "mocha": "1.16.2",
+    "expect.js": "0.3.1",
+    "supertest": "0.8.2",
+    "superagent": "0.17.0"
+>>>>>>> 31842f95d080ce7ddce3ceab29a507c0e9592c21
+    },
     "author" : "luckyan315",
     "readmeFilename" : "README.md"
-    
 }
